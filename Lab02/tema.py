@@ -54,7 +54,6 @@ for mix in ["ss", "sb", "bs", "bb"]:
             drawc3 = drawc1+drawc2
             count.append(drawc3)
         for j in range(10):
-            print(count[j])
             if count[j] == mix:
                 count1[i] = count1[i]+1
     az.plot_posterior({'count': count1})

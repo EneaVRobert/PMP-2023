@@ -50,7 +50,7 @@ for mix in ["ss", "sb", "bs", "bb"]:
         for j in range(10):
             drawc1 = "s" if random.random() > 0.5 else "b"
             drawc2 = "s" if random.random() > 0.3 else "b"
-            count.append(drawc1.join(drawc1,drawc2))
+            count.append(drawc1.join(drawc2))
     plt.figure()
     plt.hist(count)
     plt.title(mix)

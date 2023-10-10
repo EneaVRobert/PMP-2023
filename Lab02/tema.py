@@ -45,13 +45,17 @@ for i in z:
 #ex3
 
 for mix in ["ss", "sb", "bs", "bb"]:
-    count = []
+    count1 = np.zeros(100)
     for i in range(100):
+        count = []
         for j in range(10):
             drawc1 = "s" if random.random() > 0.5 else "b"
             drawc2 = "s" if random.random() > 0.3 else "b"
-            count.append(drawc1.join(drawc2))
-    plt.figure()
-    plt.hist(count)
-    plt.title(mix)
+            drawc3 = drawc1+drawc2
+            count.append(drawc3)
+        for j in range(10):
+            print(count[j])
+            if count[j] == mix:
+                count1[i] = count1[i]+1
+    az.plot_posterior({'count': count1})
     plt.show()

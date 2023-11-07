@@ -1,0 +1,12 @@
+Vom deduce efectul lui theta prin compararea ploturilor care iau aceeasi valoare pentru Y, dar
+au probabilitatea ca un client sa cumpere un anumit produs diferita. Astfel, prin compararea
+figurilor 1 si 2, 3 si 4, 5 si 6, putem deduce ca in momentul in care theta creste, valoarea lui
+n scade, numarul de clienti necesari pentru ca Y clienti sa cumpere un produs fiind mai mic.
+Analog, vom deduce efectul cresterii numarului de clienti care cumpara un produs prin compararea
+ploturilor in care Y se schimba, iar theta este la fel. Asadar, prin compararea figurilor:
+1, 3 si 5; 2, 4 si 6; se poate deduce ca in momentul in care Y creste, n va creste, numarul
+de clienti necesari pentru ca Y sa cumpere un produs fiind mai mare. In concluzie, Y si n sunt
+direct proportionale, iar theta si n sunt invers proportionale.
+
+In aceasta explicatie, theta reprezinta probabilitatea ca un client sa cumpere acel produs, iar
+Y reprezinta numarul de clienti care cumpara produsul.

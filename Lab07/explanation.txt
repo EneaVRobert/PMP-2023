@@ -1,0 +1,1 @@
+Prin observarea graficului rezulta in urma aplicarii regresiei liniare, se poate observa ca MPG si CP sunt invers proportionale.

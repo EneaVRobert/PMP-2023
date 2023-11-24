@@ -96,11 +96,11 @@ sigma = 0.2
 data = stats.norm.rvs(loc=u, scale=1/(sigma**2), size=trials)
 
 #ex2 pct 2
-with pm.Model() as model:
+with pm.Model() as model1:
 
     sigma = pm.HalfCauchy('sigma', 5)
     u = pm.Normal('u', 10)
-    model = pm.Normal("inference", mu=u, sigma=sigma, observed=data)
+    y = pm.Normal("inference", mu=u, sigma=sigma, observed=data)
 
     #Alegerea a fost facuta deoarece datele se afla sub forma unei distributii normale,
     # modelul urmand sa fie aceeasi distributie, pe cand mean-ul este descris cel mai bine de o valoare normala(putand
@@ -108,7 +108,7 @@ with pm.Model() as model:
 
     #ex2 pct 3
     idata_1 = pm.sample(1000, return_inferencedata=True, cores=1)
-    ax1 = pm.sample_posterior_predictive(idata_1, model=model, extend_inferencedata=True)
+    ax1 = pm.sample_posterior_predictive(idata_1, model=model1, extend_inferencedata=True)
     az.plot_posterior(ax1)
 
 

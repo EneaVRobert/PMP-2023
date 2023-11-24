@@ -1,11 +1,12 @@
 import numpy as np
 from scipy import stats
-import pymc as pm
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
 import matplotlib.pyplot as plt
 import networkx as nx
+import pymc as pm
+import arviz as az
 
 np.random.seed(1)
 
@@ -21,7 +22,7 @@ for j in range(10000):
     a1 = stats.uniform(0, 1)
     a2 = stats.uniform(0, 1)
     starting1 = [a1.rvs(1) for i in starting]
-    # determinam care jucator incepe primul
+    # determinam care jucator incepe primul, dupa care facem trageri intre 0 si 1, rezultatul fiind comparat cu probabilitatile fiecarui jucator de a obtine stema
     if starting1[0][0] > 0.5:
         draw1 = np.random.choice([0, 1], 1, p=[0.5, 0.5])
 
@@ -71,10 +72,11 @@ print(p2won)
 
 # ex1 pct2
 model = BayesianNetwork([('I', 'C'), ('I', 'P'), ('P', 'C')])
-
+#care jucator incepe primul
 cpd_ci = TabularCPD(variable='I', variable_card=2, values=[[0.5], [0.5]])
+#daca este primul jucator fara fisa masluita, atunci avem 1/2 prob, daca este al doilea, avem 2/3
 cpd_p = TabularCPD(variable='P', variable_card=2, values=[[0.5, 1 / 3], [0.5, 2 / 3]], evidence=['I'], evidence_card=[2])
-
+#in functie de care jucator incepe primul si daca acesta a obtinut stema sau nu, putem estima numarul total de steme in runda finala, dintre 0,1,2
 cpd_coins = TabularCPD(variable='C', variable_card=3, values=[
     [1 / 3, 1 / 3 * 1 / 3,  1 / 2, 1 / 2 * 1 / 2],
     [2 / 3, 1 / 3 * 2 / 3,  1 / 2, 1 / 2 * 1 / 2],
@@ -98,10 +100,16 @@ with pm.Model() as model:
 
     sigma = pm.HalfCauchy('sigma', 5)
     u = pm.Normal('u', 10)
-    model = pm.Normal("inference", mu=u, sigma=sigma)
+    model = pm.Normal("inference", mu=u, sigma=sigma, observed=data)
 
     #Alegerea a fost facuta deoarece datele se afla sub forma unei distributii normale,
-    # modelul urmand sa fie aceeasi distributie, pe cand
+    # modelul urmand sa fie aceeasi distributie, pe cand mean-ul este descris cel mai bine de o valoare normala(putand
+    # fi si 100 si 1000 etc.), pe cand sigma este relativ mic, fiind cel mai bine descris de o distributie halfcauchy
+
+    #ex2 pct 3
+    idata_1 = pm.sample(1000, return_inferencedata=True, cores=1)
+    ax1 = pm.sample_posterior_predictive(idata_1, model=model, extend_inferencedata=True)
+    az.plot_posterior(ax1)
 
 
 

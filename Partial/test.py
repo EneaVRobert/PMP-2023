@@ -85,9 +85,9 @@ cpd_coins = TabularCPD(variable='C', variable_card=3, values=[
 model.add_cpds(cpd_ci, cpd_p, cpd_coins)
 
 #ex1 pct 3
-#infer = VariableElimination(model)
-#result = infer.query(variables=['I'], evidence={'C': 1})
-#print(result)
+infer = VariableElimination(model)
+result = infer.query(variables=['I'], evidence={'C': 1})
+print(result)
 
 #ex2 pct 1
 trials = 100

@@ -38,9 +38,11 @@ with pm.Model() as model_1:
     az.plot_hdi(x_1[:, 0], idata_1.posterior['bd'], color='k')
     plt.xlabel(x_n[0])
     plt.ylabel(x_n[1])
+    plt.show()
+    plt.close()
 
 #Subpunctul c
-#Consider ca variabila ce influenteaza cel mai mult rezultatul este
+#Consider ca variabila ce influenteaza cel mai mult rezultatul este Age(conform graficului, variabile Survived variaza mai mult in functie de Age decat in functie de Pclass)
 
 #Subiectul 2
 
